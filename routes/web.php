@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +15,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::get('/register', function () {
+    return view('user_register');
 });
+
+Route::post('/register', [UserController::class, 'register'])->name('register');
+
+Route::get('/order', function () {
+    return view('new_order');
+});
+
+Route::post('/order', [OrderController::class, 'store'])->name('order.store');
+
+Route::get('/search-users', [UserController::class, 'search']);
+
+Route::get('/users', [UserController::class, 'listUsers']);
